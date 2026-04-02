@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prepare": "husky"
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   },
   "dependencies": {
     "vue": "^3.5.13"
@@ -20,6 +23,7 @@
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^10.0.3",
     "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vite-tsconfig-paths": "^6.1.1",
