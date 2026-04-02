@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 
+const ccc: any = 123
 console.log('123')
 </script>
 
