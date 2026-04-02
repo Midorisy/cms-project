@@ -9,6 +9,6 @@ export default antfu({
   jsonc: false,
   yaml: false,
   rules: {
-    'no-console': 'off',
+    'no-console': 'warn',
   },
 })
