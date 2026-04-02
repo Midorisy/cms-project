@@ -8,4 +8,7 @@ export default antfu({
   // Disable jsonc and yaml support
   jsonc: false,
   yaml: false,
+  rules: {
+    'no-console': 'off',
+  },
 })
