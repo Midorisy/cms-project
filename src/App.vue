@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import Demo from '@/views/demo.vue'
 
-console.log('123', '7456')
 </script>
 
 <template>
   <div class="main">
-    <h1>hello world</h1>
-    <Demo />
+    <router-view />
   </div>
 </template>
 

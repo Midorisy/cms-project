@@ -3,13 +3,11 @@
 </script>
 
 <template>
-  <div class="demo">
-    <h1>hello worlddemo</h1>
+  <div class="not-found">
+    not-found
   </div>
 </template>
 
 <style scoped>
-.demo {
-  color: red;
-}
+
 </style>
