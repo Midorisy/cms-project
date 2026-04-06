@@ -1,4 +1,3 @@
-import type { InternalAxiosRequestConfig } from 'axios'
 import Service from './createService'
 
 const service1 = new Service({
