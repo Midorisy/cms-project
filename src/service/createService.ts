@@ -1,4 +1,5 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { IApiResponseType } from '@/types/service/serviceType'
 import axios from 'axios'
 import URL from './baseConfig'
 
@@ -48,7 +49,7 @@ class Service {
       // 这里的类型还需要进一步修改
       (response) => {
         console.log('已在全局拦截')
-        return response
+        return response.data
       },
       // 响应失败时调用
       (error: any) => {
@@ -71,7 +72,7 @@ class Service {
   }
 
   request(config: IConfig) {
-    return this.service.request(config)
+    return this.service.request<any, IApiResponseType>(config)
   }
 
   get(config: IConfig) {
