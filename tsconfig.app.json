@@ -15,7 +15,7 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*":["./src/*"]
+      "@/*":["src/*"]
     },
     // ElementPlus的类型
     "types": ["element-plus/global"]
