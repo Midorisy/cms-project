@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useHomeStore from '@/store/useHomeStore/useHomeStore'
+import useHomeStore from '@/store/Home/useHomeStore'
 
 const homeStore = useHomeStore()
 </script>
@@ -7,9 +7,6 @@ const homeStore = useHomeStore()
 <template>
   <div class="home">
     {{ homeStore.count }}
-    <router-link to="/notFound">
-      notFound
-    </router-link>
   </div>
 </template>
 

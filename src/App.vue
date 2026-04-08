@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
@@ -7,6 +8,8 @@
   </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.main {
+    height: 100vh;
+  }
 </style>

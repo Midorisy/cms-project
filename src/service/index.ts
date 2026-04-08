@@ -1,6 +1,6 @@
 import Service from './createService'
 
-const service1 = new Service({
+export const service = new Service({
   interceptors: {
     requestSuccessFn: (config) => {
       console.log('实例1的拦截器')
@@ -9,7 +9,7 @@ const service1 = new Service({
   },
 })
 
-const service2 = new Service({
+export const service2 = new Service({
   interceptors: {
     requestSuccessFn: (config) => {
       console.log('实例2的拦截器')
@@ -17,8 +17,3 @@ const service2 = new Service({
     },
   },
 })
-
-export default {
-  service2,
-  service1,
-}
