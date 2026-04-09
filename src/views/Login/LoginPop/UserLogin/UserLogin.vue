@@ -7,6 +7,7 @@ import { onMounted, ref } from 'vue'
 
 import { IS_REMEMBER_PW_KEY, USER_DATA_KEY } from '@/global/constant'
 
+import router from '@/router'
 import useLoginStore from '@/store/Login/useLoginStore.ts'
 import { local } from '@/utils/storage'
 
@@ -44,6 +45,7 @@ function userLoginEvent() {
       if (valid) {
         await loginStore.userLogin(userAccount.value)
         ElMessage.success('登录成功')
+        router.push('/home')
       }
       else {
         ElMessage.error('登录验证未通过')
@@ -64,13 +66,13 @@ function userLoginEvent() {
 function showLocalUserData() {
   const localUserData: RUserData = local.getItem(USER_DATA_KEY)
   // 如果本地存储有用户数据,就回显账号
-  if (localUserData.username) {
+  if (localUserData?.username) {
     userAccount.value.username = localUserData.username
   }
 
   // 如果是记住密码，并且本地有密码,就回显密码
   const isRememberPw = local.getItem(IS_REMEMBER_PW_KEY)
-  if (isRememberPw && localUserData.password) {
+  if (isRememberPw && localUserData?.password) {
     userAccount.value.password = localUserData.password
   }
 }
