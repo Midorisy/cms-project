@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { CheckboxValueType } from 'element-plus'
 import { ref } from 'vue'
+import { IS_REMEMBER_PW_KEY } from '@/global/constant'
+import useLoginStore from '@/store/Login/useLoginStore'
+import { local } from '@/utils/storage'
 import PhoneLogin from './PhoneLogin/PhoneLogin.vue'
 import UserLogin from './UserLogin/UserLogin.vue'
 
-const isRemember = ref<boolean>(true)
+const loginStore = useLoginStore()
 
 const activeTab = ref('account')
 
@@ -11,8 +15,22 @@ const activeTab = ref('account')
 const userLoginRef = ref<InstanceType<typeof UserLogin>>()
 
 function userLoginClick() {
-  console.log('父组件调用')
   userLoginRef.value?.userLoginEvent()
+}
+
+/**
+ * 点击checkbox时触发的记住密码事件
+ * @param value 记住密码的值
+ */
+function onChangePwRemember(value: CheckboxValueType) {
+  // 如果是记住密码,就将密码存储到本地
+  loginStore.isRemember = value as boolean
+  if (value) {
+    local.setItem(IS_REMEMBER_PW_KEY, loginStore.isRemember)
+  }
+  else {
+    local.removeItem(IS_REMEMBER_PW_KEY)
+  }
 }
 </script>
 
@@ -60,7 +78,7 @@ function userLoginClick() {
     <div class="login-pop-foot">
       <div class="login-password-option">
         <div class="left">
-          <el-checkbox v-model="isRemember" class="left-checkbox" label="记住密码" size="small" />
+          <el-checkbox v-model="loginStore.isRemember" class="left-checkbox" label="记住密码" size="small" @change="onChangePwRemember" />
         </div>
         <div class="right">
           <el-link class="right-link" type="primary">
