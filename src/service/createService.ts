@@ -1,6 +1,7 @@
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import type { IApiResponseType } from '@/types/service/serviceType'
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 import URL from './baseConfig'
 
 // 定义自己的axios配置项，继承自axios的配置项
@@ -35,10 +36,13 @@ class Service {
     this.service.interceptors.request.use(
       // 请求成功时调用
       (config) => {
+        console.log('请求成功')
         return config
       },
       // 请求失败时调用
       (error: any) => {
+        console.log('请求失败')
+
         return Promise.reject(error)
       },
     )
@@ -48,12 +52,22 @@ class Service {
       // 响应成功时调用
       // 这里的类型还需要进一步修改
       (response) => {
-        console.log('已在全局拦截')
+        if (response.data.code !== 200) {
+          ElMessage({
+            type: 'error',
+            message: `${response.data.code}错误`,
+          })
+          return Promise.reject(response.data)
+        }
         return response.data
       },
       // 响应失败时调用
-      (error: any) => {
+      (error: AxiosError) => {
         // 可能会出现某些提示，需要根据实际情况处理
+        ElMessage({
+          type: 'error',
+          message: error.message,
+        })
         return Promise.reject(error)
       },
     )

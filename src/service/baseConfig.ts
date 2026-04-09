@@ -1,6 +1,6 @@
 const URL = {
   BASE_URL: 'https://www.baidu.com',
-  TIMEOUT: 5000,
+  TIMEOUT: 3000,
 }
 
 const isDev = import.meta.env.DEV
