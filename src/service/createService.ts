@@ -1,7 +1,10 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import type { RUserData } from '@/types/Login/LoginTypes'
 import type { IApiResponseType } from '@/types/service/serviceType'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { USER_DATA_KEY } from '@/global/constant'
+import { local } from '@/utils/storage'
 import URL from './baseConfig'
 
 // 定义自己的axios配置项，继承自axios的配置项
@@ -36,8 +39,9 @@ class Service {
     this.service.interceptors.request.use(
       // 请求成功时调用
       (config) => {
+        const userData: RUserData = local.getItem(USER_DATA_KEY)
         // 每次请求都添加token
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token') ?? ''}`
+        config.headers.Authorization = `Bearer ${userData ? userData.token : ''}`
         return config
       },
       // 请求失败时调用
