@@ -46,7 +46,7 @@ export interface RUserMenusType {
   name: string
   type: number
   url: string
-  icon?: string
+  icon: string
   sort: number
   children: MenusChildType[]
 }

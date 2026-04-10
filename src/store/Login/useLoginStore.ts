@@ -10,13 +10,9 @@ const useLoginStore = defineStore('loginStore', () => {
   const token = ref('')
   const id = ref(0)
   const username = ref('')
-  const isRemember = ref(false)
-  if (local.getItem(IS_REMEMBER_PW_KEY) !== null) {
-    isRemember.value = true
-  }
-
-  const userInfo = ref<TypeUserInfo>()
-  const userMenus = ref<RUserMenusType>()
+  const isRemember = ref(local.getItem(IS_REMEMBER_PW_KEY) ?? false)
+  const userInfo = ref<TypeUserInfo>(local.getItem(USER_INFO_KEY) ?? {})
+  const userMenus = ref<RUserMenusType[]>(local.getItem(USER_MENUS_KEY) ?? [])
 
   /**
    * 用户登录
@@ -52,7 +48,7 @@ const useLoginStore = defineStore('loginStore', () => {
     local.setItem(USER_INFO_KEY, userInfoResult.data)
 
     // 登录成功后，根据用户权限获取用户菜单
-    const userMenusResult: IApiResponseType<RUserMenusType> = await getUserMenusByRoleIdApi(userInfoResult.data.role.id)
+    const userMenusResult: IApiResponseType<RUserMenusType[]> = await getUserMenusByRoleIdApi(userInfoResult.data.role.id)
     // 存入用户菜单到本地pinia
     userMenus.value = userMenusResult.data
     // 存入用户菜单到本地存储
@@ -64,6 +60,8 @@ const useLoginStore = defineStore('loginStore', () => {
     token,
     username,
     isRemember,
+    userInfo,
+    userMenus,
     // 下面是导出方法
     userLogin,
   }
