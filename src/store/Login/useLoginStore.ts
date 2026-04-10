@@ -1,9 +1,9 @@
-import type { RUserData, TypeLoginResponse, TypeUserAccount } from '@/types/Login/LoginTypes'
+import type { RUserData, RUserMenusType, TypeLoginResponse, TypeUserAccount, TypeUserInfo } from '@/types/Login/LoginTypes'
 import type { IApiResponseType } from '@/types/service/serviceType'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { IS_REMEMBER_PW_KEY, USER_DATA_KEY } from '@/global/constant'
-import { userLoginApi } from '@/service/Login/LoginApis'
+import { IS_REMEMBER_PW_KEY, USER_DATA_KEY, USER_INFO_KEY, USER_MENUS_KEY } from '@/global/constant'
+import { getUserInfoByIdApi, getUserMenusByRoleIdApi, userLoginApi } from '@/service/Login/LoginApis'
 import { local } from '@/utils/storage/index'
 
 const useLoginStore = defineStore('loginStore', () => {
@@ -14,6 +14,9 @@ const useLoginStore = defineStore('loginStore', () => {
   if (local.getItem(IS_REMEMBER_PW_KEY) !== null) {
     isRemember.value = true
   }
+
+  const userInfo = ref<TypeUserInfo>()
+  const userMenus = ref<RUserMenusType>()
 
   /**
    * 用户登录
@@ -40,6 +43,20 @@ const useLoginStore = defineStore('loginStore', () => {
     }
 
     local.setItem(USER_DATA_KEY, userData)
+
+    // 登录成功后，获取用户信息
+    const userInfoResult: IApiResponseType<TypeUserInfo> = await getUserInfoByIdApi(id.value)
+    // 存入用户信息到本地pinia
+    userInfo.value = userInfoResult.data
+    // 存入用户信息到本地存储
+    local.setItem(USER_INFO_KEY, userInfoResult.data)
+
+    // 登录成功后，根据用户权限获取用户菜单
+    const userMenusResult: IApiResponseType<RUserMenusType> = await getUserMenusByRoleIdApi(userInfoResult.data.role.id)
+    // 存入用户菜单到本地pinia
+    userMenus.value = userMenusResult.data
+    // 存入用户菜单到本地存储
+    local.setItem(USER_MENUS_KEY, userMenusResult.data)
   }
 
   return {
