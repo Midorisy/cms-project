@@ -36,7 +36,8 @@ class Service {
     this.service.interceptors.request.use(
       // 请求成功时调用
       (config) => {
-        console.log('请求成功')
+        // 每次请求都添加token
+        config.headers.Authorization = `Bearer ${localStorage.getItem('token') ?? ''}`
         return config
       },
       // 请求失败时调用
