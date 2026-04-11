@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { RUserMenusType } from '@/types/Login/LoginTypes'
+import useHomeStore from '@/store/Home/useHomeStore'
 import useLoginStore from '@/store/Login/useLoginStore'
 
 const loginStore = useLoginStore()
+const homeStore = useHomeStore()
+
 const menuList: RUserMenusType[] = loginStore.userMenus
 </script>
 
@@ -12,13 +15,13 @@ const menuList: RUserMenusType[] = loginStore.userMenus
       <div class="logo">
         <img src="@/assets/avatar2.916294c1.png">
       </div>
-      <div class="title">
+      <div v-show="!homeStore.isCollapse" class="title">
         王小桃管理系统
       </div>
     </div>
 
     <div class="aside-body">
-      <el-menu>
+      <el-menu :collapse="homeStore.isCollapse" :default-active="String(menuList[0].children[0].id)">
         <el-sub-menu v-for="(menuParent) in menuList" :key="menuParent.id" :index="String(menuParent.id)">
           <!-- 一级菜单标题 -->
           <template #title>
@@ -43,6 +46,7 @@ const menuList: RUserMenusType[] = loginStore.userMenus
     flex-direction: column;
     // align-items: center;
   height: 100%;
+  border-right: 1px solid #e4e7ed;
   .aside-header{
     display: flex;
     align-items: center;
@@ -50,14 +54,15 @@ const menuList: RUserMenusType[] = loginStore.userMenus
     width: 100%;
     .logo {
       img {
-        width: 24px;
+        width: 30px;
       }
     }
     .title{
       margin-left: 16px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
       color: #409eff;
+      cursor: default;
     }
   }
 }
