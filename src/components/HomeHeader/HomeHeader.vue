@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import UserInfo from '@/components/HomeHeader/UserInfo/UserInfo.vue'
 import useHomeStore from '@/store/Home/useHomeStore'
 
 const homeStore = useHomeStore()
@@ -15,7 +16,12 @@ const homeStore = useHomeStore()
       </el-icon>
     </div>
     <div class="header-body">
-      正式内容
+      <div class="temp">
+        面包屑占位
+      </div>
+      <div class="user-info">
+        <UserInfo />
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +34,13 @@ const homeStore = useHomeStore()
   background-color: #f5f7fa;
   .aside-switch{
     font-size: 24px;
+  }
+  .header-body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
   }
 }
 </style>
