@@ -19,4 +19,19 @@ export default [
     name: 'storyList',
     component: () => import('@/views/home/story/list/index.vue'),
   },
+  {
+    path: '/home/system/user',
+    name: 'user',
+    component: () => import('@/views/home/system/user/index.vue'),
+  },
+  {
+    path: '/home/system/department',
+    name: 'department',
+    component: () => import('@/views/home/system/department/index.vue'),
+  },
+  {
+    path: '/home/system/menu',
+    name: 'menu',
+    component: () => import('@/views/home/system/menu/index.vue'),
+  },
 ]
