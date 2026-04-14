@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import type { RUserMenusType } from '@/types/Login/LoginTypes'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import useHomeStore from '@/store/Home/useHomeStore'
 import useLoginStore from '@/store/Login/useLoginStore'
+import { getMenuDefaultActive } from '@/utils/route/filterDynamicRoutes'
 
+const route = useRoute()
 const loginStore = useLoginStore()
 const homeStore = useHomeStore()
 
 const menuList: RUserMenusType[] = loginStore.userMenus
+
+const defaultActive = computed(() => {
+  return getMenuDefaultActive(route.path).id
+})
 </script>
 
 <template>
@@ -21,7 +29,7 @@ const menuList: RUserMenusType[] = loginStore.userMenus
     </div>
 
     <div class="aside-body">
-      <el-menu :collapse="homeStore.isCollapse" :default-active="String(menuList[0].children[0].id)">
+      <el-menu router :collapse="homeStore.isCollapse" :default-active="String(defaultActive)">
         <el-sub-menu v-for="(menuParent) in menuList" :key="menuParent.id" :index="String(menuParent.id)">
           <!-- 一级菜单标题 -->
           <template #title>
@@ -31,7 +39,7 @@ const menuList: RUserMenusType[] = loginStore.userMenus
             <span>{{ menuParent.name }}</span>
           </template>
           <!-- 一级菜单子项 -->
-          <el-menu-item v-for="menuChild in menuParent.children" :key="menuChild.id" :index="String(menuChild.id)">
+          <el-menu-item v-for="menuChild in menuParent.children" :key="menuChild.id" :route="{ path: menuChild.url }" :index="String(menuChild.id)">
             {{ menuChild.name }}
           </el-menu-item>
         </el-sub-menu>
