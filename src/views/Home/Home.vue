@@ -17,7 +17,10 @@ const homeStore = useHomeStore()
         <el-header>
           <HomeHeader />
         </el-header>
-        <el-main>Main</el-main>
+        <el-main>
+          <!-- home下的二级路由 -->
+          <router-view />
+        </el-main>
       </el-container>
     </el-container>
   </div>

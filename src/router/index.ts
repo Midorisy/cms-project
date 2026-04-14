@@ -1,7 +1,12 @@
-import type { RUserData } from '@/types/Login/LoginTypes'
+import type { RUserData, RUserMenusType } from '@/types/Login/LoginTypes'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { USER_DATA_KEY } from '@/global/constant'
+import { filterDynamicRoutes } from '@/utils/route/filterDynamicRoutes'
 import { local } from '@/utils/storage'
+
+// 从本地获取一个对应的路由数组
+// const modules = import.meta.glob('@/views/**/index.vue')
+// console.log(modules[`/src/views/home/analysis/dashboard/index.vue`])
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -13,7 +18,9 @@ const router = createRouter({
     {
       path: '/home',
       name: 'Home',
-      component: () => import('@/views/Home/Home.vue'),
+      component: () => import('@/views/home/Home.vue'),
+      children: [],
+
     },
     {
       path: '/login',
@@ -26,6 +33,23 @@ const router = createRouter({
       component: () => import('@/views/NotFound/NotFound.vue'),
     },
   ],
+})
+
+/**
+ * 方法2，从已设置的路由表中提取动态路由
+ */
+// 从本地获取用户菜单
+const userMenus: RUserMenusType[] = local.getItem('userMenus')
+// 遍历第一层菜单
+const myRoutes = filterDynamicRoutes(userMenus)
+/**
+ *
+// 方法1，自动根据本地数据创建路由对象并添加到路由表中
+// 从用户菜单中提取动态路由
+const myRoutes = getDynamicRoutes(userMenus)
+ */
+myRoutes.forEach((route) => {
+  router.addRoute('Home', route)
 })
 
 router.beforeEach((to, _from) => {

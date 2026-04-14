@@ -42,7 +42,7 @@ const loginStore = useLoginStore()
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/css/index.scss';
+@use '@/assets/css/index.scss' as *;
 .user-info{
     @include flex-center;
     .notify-area{
