@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BreadCrumb from '@/components/HomeHeader/BreadCrumb/BreadCrumb.vue'
 import UserInfo from '@/components/HomeHeader/UserInfo/UserInfo.vue'
 import useHomeStore from '@/store/Home/useHomeStore'
 
@@ -17,7 +18,7 @@ const homeStore = useHomeStore()
     </div>
     <div class="header-body">
       <div class="temp">
-        面包屑占位
+        <BreadCrumb />
       </div>
       <div class="user-info">
         <UserInfo />

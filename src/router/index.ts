@@ -2,6 +2,7 @@ import type { RUserData, RUserMenusType } from '@/types/Login/LoginTypes'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { USER_DATA_KEY } from '@/global/constant'
 import { filterDynamicRoutes } from '@/utils/route/filterDynamicRoutes'
+import { checkIsFirstLayerMenu } from '@/utils/route/getBreadCrumbName'
 import { local } from '@/utils/storage'
 
 // 从本地获取一个对应的路由数组
@@ -59,6 +60,21 @@ router.beforeEach((to, _from) => {
     // 如果不是前往登录页
     if (userData?.token) {
       // 如果有token,就放行
+      // 如果是通过面包屑点击的第一层菜单，就跳转到该菜单的第一个子路由
+      const firstChildPath = checkIsFirstLayerMenu(to.path)
+      if (firstChildPath) {
+        router.push({
+          path: firstChildPath,
+        })
+      }
+
+      // 进行刷新页面或直接访问Home页或点击面包屑时的处理
+      if (to.path === '/home') {
+        router.replace({
+          path: myRoutes[0].path,
+        })
+      }
+
       return true
     }
     else {
