@@ -40,7 +40,7 @@ const homeStore = useHomeStore()
       }
     }
     .el-container{
-      background-color: skyblue;
+      background-color: #f5f7fa;
 
       .el-header{
         --el-header-padding:0px;

@@ -32,7 +32,7 @@ const homeStore = useHomeStore()
     display: flex;
     align-items: center;
   height: 60px;
-  background-color: #f5f7fa;
+  background-color: #fff;
   .aside-switch{
     font-size: 24px;
   }
