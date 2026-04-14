@@ -55,6 +55,13 @@ const useLoginStore = defineStore('loginStore', () => {
     local.setItem(USER_MENUS_KEY, userMenusResult.data)
   }
 
+  function userLogout() {
+    // 清空本地保留的用户信息
+    // local.removeItem(USER_DATA_KEY)
+    local.removeItem(USER_INFO_KEY)
+    local.removeItem(USER_MENUS_KEY)
+  }
+
   return {
     id,
     token,
@@ -64,6 +71,7 @@ const useLoginStore = defineStore('loginStore', () => {
     userMenus,
     // 下面是导出方法
     userLogin,
+    userLogout,
   }
 })
 

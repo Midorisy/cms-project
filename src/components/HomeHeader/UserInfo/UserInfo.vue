@@ -1,8 +1,16 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import defaultAvatar from '@/assets/img/avatar.jpg'
 import useLoginStore from '@/store/Login/useLoginStore'
 
+const router = useRouter()
+
 const loginStore = useLoginStore()
+
+function userLogout() {
+  loginStore.userLogout()
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -22,7 +30,7 @@ const loginStore = useLoginStore()
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>
+            <el-dropdown-item @click="userLogout">
               <el-icon><SwitchButton /></el-icon>
               <span>退出系统</span>
             </el-dropdown-item>
