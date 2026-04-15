@@ -11,9 +11,19 @@ const paginationConfig = ref({
   pageSize: 10,
 })
 
+// 分页器改变时触发
+function handleSizeChange() {
+  systemUserStore.getUserSearchList(paginationConfig.value)
+}
+
+// 当前页改变时触发
+function handleCurrentChange() {
+  systemUserStore.getUserSearchList(paginationConfig.value)
+}
+
 onMounted(async () => {
   // 初始化时获取用户列表
-  await systemUserStore.getUserSearchList()
+  await systemUserStore.getUserSearchList(paginationConfig.value)
 })
 </script>
 
@@ -72,6 +82,8 @@ onMounted(async () => {
           size="default"
           layout="total, sizes, prev, pager, next, jumper"
           :total="20"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         />
       </div>
     </div>

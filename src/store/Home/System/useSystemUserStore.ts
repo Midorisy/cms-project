@@ -7,8 +7,12 @@ import { getUserSearchListApi } from '@/service/Home/System/userSeachApi.ts'
 const useSystemUserStore = defineStore('systemUserStore', () => {
   const userSearchInfo = ref<RUserSearchInfoObjectType>()
 
-  async function getUserSearchList() {
-    const res: IApiResponseType<RUserSearchInfoObjectType> = await getUserSearchListApi()
+  async function getUserSearchList(pageConfig: any) {
+    // 计算偏移量
+    const offset = (pageConfig.currentPage - 1) * pageConfig.pageSize
+    const limit = pageConfig.pageSize
+
+    const res: IApiResponseType<RUserSearchInfoObjectType> = await getUserSearchListApi(offset, limit)
     userSearchInfo.value = res.data
   }
 
