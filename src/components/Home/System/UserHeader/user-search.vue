@@ -6,7 +6,7 @@ const searchForm = ref()
 const searchFormData = ref({
   name: '',
   realName: '',
-  cellPhone: '',
+  cellphone: 0,
   enable: 1,
   createAt: [],
 })
@@ -33,7 +33,7 @@ function resetForm() {
         </el-col>
         <el-col :span="8">
           <el-form-item prop="cellPhone" label="手机号码">
-            <el-input v-model="searchFormData.cellPhone" placeholder="请输入手机号码" />
+            <el-input v-model="searchFormData.cellphone" placeholder="请输入手机号码" />
           </el-form-item>
         </el-col>
       </el-row>
