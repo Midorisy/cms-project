@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import UserContent from '@/components/Home/System/user-content/user-content.vue'
 import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
 </script>
 
@@ -8,7 +9,7 @@ import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
       <UserSearch />
     </div>
     <div class="user-content">
-      user-content
+      <UserContent />
     </div>
   </div>
 </template>
