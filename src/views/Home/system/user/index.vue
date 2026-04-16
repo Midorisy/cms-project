@@ -1,6 +1,18 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import DialogModal from '@/components/Home/System/dialog-modal/dialog-modal.vue'
 import UserContent from '@/components/Home/System/user-content/user-content.vue'
 import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
+
+const dialogModal = ref<InstanceType<typeof DialogModal>>()
+
+/**
+   * 监听是否新建用户事件
+   * @param val 是否新建用户
+   */
+function createUserOnClick() {
+  dialogModal.value?.openDialog()
+}
 </script>
 
 <template>
@@ -9,7 +21,10 @@ import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
       <UserSearch />
     </div>
     <div class="user-content">
-      <UserContent />
+      <UserContent @click-create-user="createUserOnClick" />
+    </div>
+    <div class="dialog">
+      <DialogModal ref="dialogModal" />
     </div>
   </div>
 </template>

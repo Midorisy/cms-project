@@ -4,6 +4,8 @@ import { computed, onMounted, ref } from 'vue'
 import useSystemUserStore from '@/store/Home/System/useSystemUserStore.ts'
 import { formatDateByUtc } from '@/utils/formatDate/formatDate.ts'
 
+const emit = defineEmits(['clickCreateUser'])
+
 const systemUserStore = useSystemUserStore()
 const userSearchInfoList = computed(() => systemUserStore?.userSearchInfo?.list ?? [])
 
@@ -11,6 +13,10 @@ const paginationConfig = ref({
   currentPage: 1,
   pageSize: 10,
 })
+
+function CreateUserBtnClick() {
+  emit('clickCreateUser')
+}
 
 /**
  * 删除用户
@@ -52,7 +58,7 @@ onMounted(async () => {
         用户列表
       </div>
       <div class="btn">
-        <el-button type="primary">
+        <el-button type="primary" @click="CreateUserBtnClick">
           新建用户
         </el-button>
       </div>
