@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import { computed, onMounted, ref } from 'vue'
 import useSystemUserStore from '@/store/Home/System/useSystemUserStore.ts'
 import { formatDateByUtc } from '@/utils/formatDate/formatDate.ts'
@@ -11,12 +12,29 @@ const paginationConfig = ref({
   pageSize: 10,
 })
 
-// 分页器改变时触发
+/**
+ * 删除用户
+ * @param row 选中的用户行数据
+ */
+async function handleDelete(row: any) {
+  const res = await systemUserStore.deleteUserInfo(row.id)
+  if (res.code === 200) {
+    ElMessage.success('删除成功')
+  }
+  // 删除成功后，刷新用户列表
+  systemUserStore.getUserSearchList(paginationConfig.value)
+}
+
+/**
+ * 分页器改变时触发
+ */
 function handleSizeChange() {
   systemUserStore.getUserSearchList(paginationConfig.value)
 }
 
-// 当前页改变时触发
+/**
+ * 当前页改变时触发
+ */
 function handleCurrentChange() {
   systemUserStore.getUserSearchList(paginationConfig.value)
 }
@@ -63,12 +81,12 @@ onMounted(async () => {
             {{ formatDateByUtc(row.updateAt) }}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
-          <template #default>
+        <el-table-column label="操作" :width="140">
+          <template #default="{ row }">
             <el-button type="primary" size="small">
               编辑
             </el-button>
-            <el-button type="danger" size="small">
+            <el-button type="danger" size="small" @click="handleDelete(row)">
               删除
             </el-button>
           </template>
@@ -92,7 +110,7 @@ onMounted(async () => {
 
 <style scoped lang="scss">
 .user-content{
-    margin-top: 50px;
+    margin-top: 20px;
     width: 100%;
     height: 640px;
     background-color: #fff;
