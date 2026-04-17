@@ -38,7 +38,10 @@ export function filterDynamicRoutes(userMenus: RUserMenusType[]) {
  * @returns
  */
 export function getMenuDefaultActive(routeUrl: string) {
-  const menuList = local.getItem('userMenus')
+  const menuList = local.getItem('userMenus') ?? []
+  if (menuList.length === 0) {
+    return null
+  }
   for (const menu of menuList) {
     if (menu.children.length > 0) {
       for (const childMenu of menu.children) {

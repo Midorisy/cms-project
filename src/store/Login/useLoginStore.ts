@@ -3,6 +3,7 @@ import type { IApiResponseType } from '@/types/service/serviceType'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { IS_REMEMBER_PW_KEY, USER_DATA_KEY, USER_INFO_KEY, USER_MENUS_KEY } from '@/global/constant'
+import { pushDynamicRoutes } from '@/router/home/pushDynamicRoutes'
 import { getUserInfoByIdApi, getUserMenusByRoleIdApi, userLoginApi } from '@/service/Login/LoginApis'
 import { local } from '@/utils/storage/index'
 
@@ -53,11 +54,15 @@ const useLoginStore = defineStore('loginStore', () => {
     userMenus.value = userMenusResult.data
     // 存入用户菜单到本地存储
     local.setItem(USER_MENUS_KEY, userMenusResult.data)
+    // 登录成功后，添加一次动态路由
+    pushDynamicRoutes()
   }
 
   function userLogout() {
     // 清空本地保留的用户信息
-    // local.removeItem(USER_DATA_KEY)
+    const userData = local.getItem(USER_DATA_KEY) ?? {}
+    userData.token = ''
+    local.setItem(USER_DATA_KEY, userData)
     local.removeItem(USER_INFO_KEY)
     local.removeItem(USER_MENUS_KEY)
   }
