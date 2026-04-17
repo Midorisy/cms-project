@@ -39,7 +39,7 @@ class Service {
     this.service.interceptors.request.use(
       // 请求成功时调用
       (config) => {
-        const userData: RUserData = local.getItem(USER_DATA_KEY)
+        const userData: RUserData = local.getItem(USER_DATA_KEY) ?? {}
         // 每次请求都添加token
         config.headers.Authorization = `Bearer ${userData ? userData.token : ''}`
         return config

@@ -13,7 +13,7 @@ const homeStore = useHomeStore()
 const menuList: RUserMenusType[] = loginStore.userMenus
 
 const defaultActive = computed(() => {
-  return getMenuDefaultActive(route.path).id
+  return getMenuDefaultActive(route.path).id ?? null
 })
 </script>
 

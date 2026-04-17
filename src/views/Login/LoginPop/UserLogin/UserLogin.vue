@@ -64,14 +64,14 @@ function userLoginEvent() {
  * 显示本地存储的用户数据
  */
 function showLocalUserData() {
-  const localUserData: RUserData = local.getItem(USER_DATA_KEY)
+  const localUserData: RUserData = local.getItem(USER_DATA_KEY) ?? {}
   // 如果本地存储有用户数据,就回显账号
   if (localUserData?.username) {
     userAccount.value.username = localUserData.username
   }
 
   // 如果是记住密码，并且本地有密码,就回显密码
-  const isRememberPw = local.getItem(IS_REMEMBER_PW_KEY)
+  const isRememberPw = local.getItem(IS_REMEMBER_PW_KEY) ?? false
   if (isRememberPw && localUserData?.password) {
     userAccount.value.password = localUserData.password
   }
