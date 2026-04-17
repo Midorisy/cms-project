@@ -90,33 +90,33 @@ class Service {
     }
   }
 
-  request(config: IConfig) {
-    return this.service.request<any, IApiResponseType>(config)
+  request<T>(config: IConfig) {
+    return this.service.request<any, IApiResponseType<T>>(config)
   }
 
-  get(config: IConfig) {
-    return this.request({
+  get<T>(config: IConfig) {
+    return this.request<T>({
       ...config,
       method: 'GET',
     })
   }
 
-  post(config: IConfig) {
-    return this.request({
+  post<T>(config: IConfig) {
+    return this.request<T>({
       ...config,
       method: 'POST',
     })
   }
 
-  put(config: IConfig) {
-    return this.request({
+  put<T>(config: IConfig) {
+    return this.request<T>({
       ...config,
       method: 'PUT',
     })
   }
 
-  delete(config: IConfig) {
-    return this.request({
+  delete<T>(config: IConfig) {
+    return this.request<T>({
       ...config,
       method: 'DELETE',
     })

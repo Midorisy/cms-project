@@ -1,7 +1,8 @@
+import type { RUserSearchInfoObjectType } from '@/types/Home/System/user'
 import { service } from '@/service/index.ts'
 
 export async function getUserSearchListApi(offset = 0, limit = 10) {
-  return await service.post({
+  return await service.post<RUserSearchInfoObjectType>({
     url: '/home/system/userSearch',
     data: {
       offset,
