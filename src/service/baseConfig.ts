@@ -1,5 +1,5 @@
 const URL = {
-  BASE_URL: 'https://www.baidu.com',
+  BASE_URL: 'http://localhost:3000/api',
   TIMEOUT: 3000,
 }
 
@@ -9,7 +9,7 @@ if (isDev) {
   URL.BASE_URL = 'http://localhost:3000/api'
 }
 else {
-  URL.BASE_URL = 'www.google.com'
+  URL.BASE_URL = 'http://localhost:3000/api'
 }
 
 export default URL

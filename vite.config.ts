@@ -22,6 +22,11 @@ export default defineConfig({
     }),
   ],
 
+  // 关闭代码压缩
+  build: {
+    minify: false,
+  },
+  // 配置路径别名
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

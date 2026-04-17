@@ -11,12 +11,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     /*别名设置 */
-    "ignoreDeprecations": "6.0",
+    // "ignoreDeprecations": "6.0",  // 新增这一行
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     // ElementPlus的类型
     "types": [

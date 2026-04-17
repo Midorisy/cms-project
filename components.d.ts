@@ -35,7 +35,6 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
     ElOption: typeof import('element-plus/es')['ElOption']
     ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRow: typeof import('element-plus/es')['ElRow']
@@ -51,7 +50,6 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UserContent: typeof import('./src/components/Home/System/user-content/user-content.vue')['default']
-    UserHeader: typeof import('./src/components/Home/System/UserHeader/user-search.vue')['default']
     UserInfo: typeof import('./src/components/HomeHeader/UserInfo/UserInfo.vue')['default']
     UserSearch: typeof import('./src/components/Home/System/UserHeader/user-search.vue')['default']
   }

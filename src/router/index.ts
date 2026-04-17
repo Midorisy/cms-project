@@ -40,7 +40,7 @@ const router = createRouter({
  * 方法2，从已设置的路由表中提取动态路由
  */
 // 从本地获取用户菜单
-const userMenus: RUserMenusType[] = local.getItem('userMenus')
+const userMenus: RUserMenusType[] = local.getItem('userMenus') ?? []
 // 遍历第一层菜单
 const myRoutes = filterDynamicRoutes(userMenus)
 /**
@@ -70,7 +70,7 @@ router.beforeEach((to, _from) => {
 
       // 进行刷新页面或直接访问Home页或点击面包屑时的处理
       if (to.path === '/home') {
-        router.replace({
+        router.push({
           path: myRoutes[0].path,
         })
       }
