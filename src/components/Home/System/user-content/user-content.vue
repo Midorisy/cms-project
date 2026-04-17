@@ -14,8 +14,15 @@ const paginationConfig = ref({
   pageSize: 10,
 })
 
+/**
+ * 点击新建用户按钮
+ * 触发新建用户事件
+ * 发送获取部门列表请求、角色列表请求
+ */
 function CreateUserBtnClick() {
   emit('clickCreateUser')
+  systemUserStore.getDepartmentList()
+  systemUserStore.getRoleTypeList()
 }
 
 /**

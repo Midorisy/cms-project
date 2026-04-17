@@ -1,13 +1,14 @@
 export interface UserSearchInfoType {
-  id: number
+  id?: number
   name: string
   realname: string
-  cellphone: number
-  enable: number
-  departmentId: number
-  roleId: number
+  cellphone: number | null
+  enable?: number
+  departmentId: number | null
+  roleId: number | null
   createAt: string
   updateAt: string
+  password?: string
 }
 
 export interface RUserSearchInfoObjectType {
