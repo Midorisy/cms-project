@@ -1,4 +1,4 @@
-import type { TypeUserAccount } from '@/types/Login/LoginTypes'
+import type { RUserMenusType, TypeLoginResponse, TypeUserAccount, TypeUserInfo } from '@/types/Login/LoginTypes'
 import { service } from '@/service/index.ts'
 
 /**
@@ -7,7 +7,7 @@ import { service } from '@/service/index.ts'
  * @returns 登录响应
  */
 export async function userLoginApi(account: TypeUserAccount) {
-  return await service.post({
+  return await service.post<TypeLoginResponse>({
     url: '/login/user',
     data: account,
   })
@@ -19,7 +19,7 @@ export async function userLoginApi(account: TypeUserAccount) {
  * @returns 用户信息
  */
 export function getUserInfoByIdApi(id: number) {
-  return service.get({
+  return service.get<TypeUserInfo>({
     url: `/login/user/${id}`,
   })
 }
@@ -30,7 +30,7 @@ export function getUserInfoByIdApi(id: number) {
  * @returns 用户菜单
  */
 export function getUserMenusByRoleIdApi(roleId: number) {
-  return service.get({
+  return service.get<RUserMenusType[]>({
     url: `/login/user/${roleId}/menus/`,
   })
 }
