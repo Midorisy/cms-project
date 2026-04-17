@@ -7,7 +7,7 @@ import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
 const dialogModal = ref<InstanceType<typeof DialogModal>>()
 
 /**
-   * 监听是否新建用户事件
+   * 监听是否触发了新建用户事件
    * @param val 是否新建用户
    */
 function createUserOnClick() {
