@@ -4,7 +4,7 @@ import { computed, onMounted, ref } from 'vue'
 import useSystemUserStore from '@/store/Home/System/useSystemUserStore.ts'
 import { formatDateByUtc } from '@/utils/formatDate/formatDate.ts'
 
-const emit = defineEmits(['clickCreateUser'])
+const emit = defineEmits(['clickCreateUser', 'clickEditUser'])
 
 const systemUserStore = useSystemUserStore()
 const userSearchInfoList = computed(() => systemUserStore?.userSearchInfo?.list ?? [])
@@ -21,6 +21,12 @@ const paginationConfig = ref({
  */
 function CreateUserBtnClick() {
   emit('clickCreateUser')
+  systemUserStore.getDepartmentList()
+  systemUserStore.getRoleTypeList()
+}
+
+function handleEdit(row: any) {
+  emit('clickEditUser', row)
   systemUserStore.getDepartmentList()
   systemUserStore.getRoleTypeList()
 }
@@ -96,7 +102,7 @@ onMounted(async () => {
         </el-table-column>
         <el-table-column label="操作" :width="140">
           <template #default="{ row }">
-            <el-button type="primary" size="small">
+            <el-button type="primary" size="small" @click="handleEdit(row)">
               编辑
             </el-button>
             <el-button type="danger" size="small" @click="handleDelete(row)">

@@ -13,6 +13,10 @@ const dialogModal = ref<InstanceType<typeof DialogModal>>()
 function createUserOnClick() {
   dialogModal.value?.openDialog()
 }
+
+function userEditBtnClick(row: any) {
+  dialogModal.value?.openDialog(row)
+}
 </script>
 
 <template>
@@ -21,7 +25,7 @@ function createUserOnClick() {
       <UserSearch />
     </div>
     <div class="user-content">
-      <UserContent @click-create-user="createUserOnClick" />
+      <UserContent @click-create-user="createUserOnClick" @click-edit-user="userEditBtnClick" />
     </div>
     <div class="dialog">
       <DialogModal ref="dialogModal" />

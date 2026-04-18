@@ -6,7 +6,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getDepartmentListApi } from '@/service/Home/System/departmentApi'
 import { getRoleTypeListApi } from '@/service/Home/System/roleListApi'
-import { deleteUserInfoApi, getUserSearchListApi } from '@/service/Home/System/userHandleApi'
+import { addCreatedUserApi, deleteUserInfoApi, getUserSearchListApi, updateUserInfoApi } from '@/service/Home/System/userHandleApi'
 
 const useSystemUserStore = defineStore('systemUserStore', () => {
   const userSearchInfo = ref<RUserSearchInfoObjectType>()
@@ -28,6 +28,28 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
   const roleTypeList = ref<roleType[]>([])
 
   /**
+   * 更新用户信息
+   * @returns 更新结果
+   */
+  async function updateUserInfo() {
+    userCreateInfo.value.createAt = new Date().toISOString()
+    userCreateInfo.value.updateAt = new Date().toISOString()
+    const res: IApiResponseType<any> = await updateUserInfoApi(userCreateInfo.value)
+    return res
+  }
+
+  /**
+   * 新增用户
+   * @returns 新增结果
+   */
+  async function addCreatedUser() {
+    userCreateInfo.value.createAt = new Date().toISOString()
+    userCreateInfo.value.updateAt = new Date().toISOString()
+    const res: IApiResponseType<any> = await addCreatedUserApi(userCreateInfo.value)
+    return res
+  }
+
+  /**
    * 删除用户
    * @param userId 用户ID
    * @returns 删除结果
@@ -41,7 +63,7 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
    * 获取用户列表
    * @param pageConfig 分页配置
    */
-  async function getUserSearchList(pageConfig: any) {
+  async function getUserSearchList(pageConfig: any = { currentPage: 1, pageSize: 10 }) {
     // 计算偏移量
     const offset = (pageConfig.currentPage - 1) * pageConfig.pageSize
     const limit = pageConfig.pageSize
@@ -73,6 +95,8 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
     deleteUserInfo,
     getDepartmentList,
     getRoleTypeList,
+    addCreatedUser,
+    updateUserInfo,
   }
 })
 
