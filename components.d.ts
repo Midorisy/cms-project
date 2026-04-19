@@ -54,6 +54,6 @@ declare module 'vue' {
     UserContent: typeof import('./src/components/home/system/user/user-content/index.vue')['default']
     UserHeader: typeof import('./src/components/home/system/user/user-header/index.vue')['default']
     UserInfo: typeof import('./src/components/HomeHeader/UserInfo/UserInfo.vue')['default']
-    UserSearch: typeof import('./src/components/home/system/user/UserHeader/user-search.vue')['default']
+    UserSearch: typeof import('./src/components/home/system/UserHeader/user-search.vue')['default']
   }
 }
