@@ -1,13 +1,20 @@
 <script setup lang="ts">
-
+import DepartmentHeader from '@/components/home/system/department/department-header/index.vue'
 </script>
 
 <template>
-  <div class="department">
-    department
+  <div class="system-department">
+    <div class="department-header">
+      <DepartmentHeader />
+    </div>
+    <div class="department-content" />
+    <div class="dialog" />
   </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.system-user{
+  height: 100%;
+  width: 100%;
+}
 </style>

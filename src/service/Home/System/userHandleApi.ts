@@ -2,17 +2,18 @@ import type { RUserSearchInfoObjectType, UserSearchInfoType } from '@/types/Home
 import { service } from '@/service/index.ts'
 
 /**
- * 获取用户列表
- * @param offset 偏移量
- * @param limit 限制数量
- * @returns
+ * 获取type列表
+ * @param searchType 搜索类型
+ * @param searchInfo 搜索信息
+ * @param {object} pageConfig 分页配置
+ * @returns type列表数据
  */
-export async function getUserSearchListApi(offset = 0, limit = 10) {
+export async function getSearchTypechListApi(searchType: string, searchInfo: any, pageConfig = { offset: 0, limit: 10 }) {
   return await service.post<RUserSearchInfoObjectType>({
-    url: '/home/system/userSearch',
+    url: `/home/system/${searchType}/list`,
     data: {
-      offset,
-      limit,
+      searchInfo,
+      ...pageConfig,
     },
   })
 }

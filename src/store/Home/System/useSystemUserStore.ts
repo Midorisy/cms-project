@@ -6,7 +6,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getDepartmentListApi } from '@/service/Home/System/departmentApi'
 import { getRoleTypeListApi } from '@/service/Home/System/roleListApi'
-import { addCreatedUserApi, deleteUserInfoApi, getUserSearchListApi, updateUserInfoApi } from '@/service/Home/System/userHandleApi'
+// 外部的API接口
+import { addCreatedUserApi, deleteUserInfoApi, getSearchTypechListApi, updateUserInfoApi } from '@/service/Home/System/userHandleApi'
 
 const useSystemUserStore = defineStore('systemUserStore', () => {
   const userSearchInfo = ref<RUserSearchInfoObjectType>()
@@ -60,15 +61,15 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
   }
 
   /**
-   * 获取用户列表
+   * 获取对应类型的搜索列表
    * @param pageConfig 分页配置
    */
-  async function getUserSearchList(pageConfig: any = { currentPage: 1, pageSize: 10 }) {
+  async function getSearchTypechList(searchType: string, searchInfo: any, pageConfig: any = { currentPage: 1, pageSize: 10 }) {
     // 计算偏移量
     const offset = (pageConfig.currentPage - 1) * pageConfig.pageSize
     const limit = pageConfig.pageSize
 
-    const res: IApiResponseType<RUserSearchInfoObjectType> = await getUserSearchListApi(offset, limit)
+    const res: IApiResponseType<RUserSearchInfoObjectType> = await getSearchTypechListApi(searchType, searchInfo, { offset, limit })
     userSearchInfo.value = res.data
   }
 
@@ -91,7 +92,7 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
     departmentList,
     roleTypeList,
     // 下面是方法
-    getUserSearchList,
+    getSearchTypechList,
     deleteUserInfo,
     getDepartmentList,
     getRoleTypeList,
