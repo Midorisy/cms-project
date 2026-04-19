@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DepartmentContent from '@/components/home/system/department/department-content/index.vue'
 import DepartmentHeader from '@/components/home/system/department/department-header/index.vue'
 </script>
 
@@ -7,7 +8,9 @@ import DepartmentHeader from '@/components/home/system/department/department-hea
     <div class="department-header">
       <DepartmentHeader />
     </div>
-    <div class="department-content" />
+    <div class="department-content">
+      <DepartmentContent />
+    </div>
     <div class="dialog" />
   </div>
 </template>
