@@ -4,7 +4,6 @@ import type { RUserSearchInfoObjectType, UserSearchInfoType } from '@/types/Home
 import type { IApiResponseType } from '@/types/service/serviceType'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getDepartmentListApi } from '@/service/Home/System/departmentApi'
 import { getRoleTypeListApi } from '@/service/Home/System/roleListApi'
 // 外部的API接口
 import { addCreatedUserApi, deleteUserInfoApi, getSearchTypechListApi, updateUserInfoApi } from '@/service/Home/System/userHandleApi'
@@ -24,7 +23,7 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
     departmentId: null,
   })
   // 部门列表
-  const departmentList = ref<departmentType[]>([])
+  const departmentList = ref<departmentType['list']>([])
   // 角色列表
   const roleTypeList = ref<roleType[]>([])
 
@@ -77,8 +76,8 @@ const useSystemUserStore = defineStore('systemUserStore', () => {
    * 获取部门列表
    */
   async function getDepartmentList() {
-    const res: IApiResponseType<departmentType[]> = await getDepartmentListApi()
-    departmentList.value = res.data
+    const res: IApiResponseType<departmentType> = await getSearchTypechListApi('department', {})
+    departmentList.value = res.data.list || []
   }
 
   async function getRoleTypeList() {

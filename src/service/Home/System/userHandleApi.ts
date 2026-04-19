@@ -1,4 +1,4 @@
-import type { RUserSearchInfoObjectType, UserSearchInfoType } from '@/types/Home/System/user'
+import type { UserSearchInfoType } from '@/types/Home/System/user'
 import { service } from '@/service/index.ts'
 
 /**
@@ -9,7 +9,7 @@ import { service } from '@/service/index.ts'
  * @returns type列表数据
  */
 export async function getSearchTypechListApi(searchType: string, searchInfo: any, pageConfig = { offset: 0, limit: 10 }) {
-  return await service.post<RUserSearchInfoObjectType>({
+  return await service.post<any>({
     url: `/home/system/${searchType}/list`,
     data: {
       searchInfo,
