@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DialogModal from '@/components/Home/System/dialog-modal/dialog-modal.vue'
-import UserContent from '@/components/Home/System/user-content/user-content.vue'
-import UserSearch from '@/components/Home/System/UserHeader/user-search.vue'
+import DialogModal from '@/components/home/system/dialog-modal/dialog-modal.vue'
+import UserContent from '@/components/home/system/user/user-content/index.vue'
+import UserHeader from '@/components/home/system/user/user-header/index.vue'
 
 const dialogModal = ref<InstanceType<typeof DialogModal>>()
 
@@ -22,7 +22,7 @@ function userEditBtnClick(row: any) {
 <template>
   <div class="system-user">
     <div class="user-header">
-      <UserSearch />
+      <UserHeader />
     </div>
     <div class="user-content">
       <UserContent @click-create-user="createUserOnClick" @click-edit-user="userEditBtnClick" />

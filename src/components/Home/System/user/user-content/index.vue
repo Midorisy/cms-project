@@ -41,26 +41,26 @@ async function handleDelete(row: any) {
     ElMessage.success('删除成功')
   }
   // 删除成功后，刷新用户列表
-  systemUserStore.getUserSearchList(paginationConfig.value)
+  systemUserStore.getSearchTypechList('user', {}, paginationConfig.value)
 }
 
 /**
  * 分页器改变时触发
  */
 function handleSizeChange() {
-  systemUserStore.getUserSearchList(paginationConfig.value)
+  systemUserStore.getSearchTypechList('user', {}, paginationConfig.value)
 }
 
 /**
  * 当前页改变时触发
  */
 function handleCurrentChange() {
-  systemUserStore.getUserSearchList(paginationConfig.value)
+  systemUserStore.getSearchTypechList('user', {}, paginationConfig.value)
 }
 
 onMounted(async () => {
   // 初始化时获取用户列表
-  await systemUserStore.getUserSearchList(paginationConfig.value)
+  await systemUserStore.getSearchTypechList('user', {}, paginationConfig.value)
 })
 </script>
 

@@ -12,7 +12,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BreadCrumb: typeof import('./src/components/HomeHeader/BreadCrumb/BreadCrumb.vue')['default']
-    DialogModal: typeof import('./src/components/Home/System/dialog-modal/dialog-modal.vue')['default']
+    DepartmentContent: typeof import('./src/components/home/system/department/department-content/index.vue')['default']
+    DepartmentHeader: typeof import('./src/components/home/system/department/department-header/index.vue')['default']
+    DialogModal: typeof import('./src/components/home/system/dialog-modal/dialog-modal.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -49,8 +51,9 @@ declare module 'vue' {
     HomeHeader: typeof import('./src/components/HomeHeader/HomeHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    UserContent: typeof import('./src/components/Home/System/user-content/user-content.vue')['default']
+    UserContent: typeof import('./src/components/home/system/user/user-content/index.vue')['default']
+    UserHeader: typeof import('./src/components/home/system/user/user-header/index.vue')['default']
     UserInfo: typeof import('./src/components/HomeHeader/UserInfo/UserInfo.vue')['default']
-    UserSearch: typeof import('./src/components/Home/System/UserHeader/user-search.vue')['default']
+    UserSearch: typeof import('./src/components/home/system/user/UserHeader/user-search.vue')['default']
   }
 }
