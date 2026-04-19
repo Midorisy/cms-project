@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import DialogModal from '@/components/home/system/dialog-modal/dialog-modal.vue'
-import UserContent from '@/components/home/system/user-content/user-content.vue'
-import UserSearch from '@/components/home/system/UserHeader/user-search.vue'
+import UserContent from '@/components/home/system/user/user-content/index.vue'
+import UserSearch from '@/components/home/system/user/user-header/index.vue'
 
 const dialogModal = ref<InstanceType<typeof DialogModal>>()
 
