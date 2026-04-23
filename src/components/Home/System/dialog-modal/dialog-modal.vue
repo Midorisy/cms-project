@@ -31,7 +31,7 @@ async function submitForm() {
     await systemUserStore.updateUserInfo()
   }
   // 刷新用户列表
-  await systemUserStore.getUserSearchList()
+  await systemUserStore.getSearchTypechList('user', {})
   // 清空表单数据
   dialogformRef.value?.resetFields()
   userCreateInfo.value.roleId = null
