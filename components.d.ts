@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     BreadCrumb: typeof import('./src/components/HomeHeader/BreadCrumb/BreadCrumb.vue')['default']
     DepartmentContent: typeof import('./src/components/home/system/department/department-content/index.vue')['default']
+    DepartmentDialog: typeof import('./src/components/home/system/department/department-dialog/index.vue')['default']
     DepartmentHeader: typeof import('./src/components/home/system/department/department-header/index.vue')['default']
     DialogModal: typeof import('./src/components/home/system/dialog-modal/dialog-modal.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']

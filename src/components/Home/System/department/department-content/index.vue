@@ -2,7 +2,6 @@
 import { ElMessage } from 'element-plus'
 import { computed, onMounted, ref } from 'vue'
 import useSystemUserStore from '@/store/Home/System/useSystemUserStore.ts'
-import { formatDateByUtc } from '@/utils/formatDate/formatDate.ts'
 import contentConfig from './content.config.ts'
 
 const emit = defineEmits(['clickCreateUser', 'clickEditUser'])
@@ -83,7 +82,10 @@ onMounted(async () => {
         <!-- 遍历所有的表格列 -->
         <el-table-column v-for="item in contentConfig.elTable" :key="item.prop" v-bind="item">
           <template v-if="item.slotName" #default="{ row }">
-            {{ formatDateByUtc(row[item.prop]) }}
+            <!-- 自定义插槽 -->
+            <slot :name="item.slotName" :scope="row">
+              {{ row[item.prop] }}
+            </slot>
           </template>
         </el-table-column>
         <el-table-column label="操作" :width="140">
